@@ -5,7 +5,9 @@ class TasksController < ApplicationController
     @tasks = Task.all
   end
 
+  # 詳細表示
   def show
+    @task = Task.find(params[:id])
   end
 
   # 新規登録画面
