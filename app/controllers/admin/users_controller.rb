@@ -21,6 +21,11 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  # ユーザー詳細
+  def show
+    @user = User.find(params[:id])
+  end
+
   # ユーザー編集
   def edit
     @user = User.find(params[:id])
@@ -36,7 +41,11 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def show
+  # 削除
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to admin_users_url, notice: "ユーザー「#{@user.name}」を削除しました。"
   end
 
   private
