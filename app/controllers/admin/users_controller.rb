@@ -1,5 +1,10 @@
 class Admin::UsersController < ApplicationController
 
+  # ユーザー一覧
+  def index
+    @users = User.all
+  end
+
   # ユーザー登録フォーム
   def new
     @user = User.new
@@ -20,9 +25,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-  end
-
-  def index
   end
 
   private
