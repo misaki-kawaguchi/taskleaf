@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # 一覧表示
   def index
@@ -7,7 +8,6 @@ class TasksController < ApplicationController
 
   # 詳細表示
   def show
-    @task = current_user.tasks.find(params[:id])
   end
 
   # 新規登録画面
@@ -27,26 +27,27 @@ class TasksController < ApplicationController
 
   # 編集画面
   def edit
-    @task = current_user.tasks.find(params[:id])
   end
 
   # データベースを更新
   def update
-    task = current_user.tasks.find(params[:id])
-    task.update!(task_params)
-    redirect_to tasks_url, notice: "タスク「#{task.name}」を更新しました。"
+    @task.update!(task_params)
+    redirect_to tasks_url, notice: "タスク「#{@task.name}」を更新しました。"
   end
 
   # 削除
   def destroy
-    task = current_user.tasks.find(params[:id])
-    task.destroy
-    redirect_to tasks_url, notice: "タスク「#{task.name}」を削除しました。"
+    @task.destroy
+    redirect_to tasks_url, notice: "タスク「#{@task.name}」を削除しました。"
   end
 
   private
 
   def task_params
     params.require(:task).permit(:name, :description)
+  end
+
+  def set_task
+    @task = current_user.tasks.find(params[:id])
   end
 end
