@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  before_action :require_admin
 
   # ユーザー一覧
   def index
@@ -52,5 +53,9 @@ class Admin::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
+  end
+
+  def require_admin
+    redirect_to root_url unique current_user.admin?
   end
 end
