@@ -56,6 +56,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def require_admin
-    redirect_to root_url unique current_user.admin?
+    redirect_to root_url unless current_user.admin?
   end
 end
