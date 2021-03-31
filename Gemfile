@@ -59,3 +59,6 @@ gem 'html2slim'
 
 # Bootstrap
 gem 'bootstrap'
+
+# URLをリンクとして表示
+gem 'rails_autolink'
